@@ -5,9 +5,10 @@
          point="org.eclipse.ui.editors">
       <editor
             class="com.shashwat.rcp.message.translator.editors.MTEditor"
+            contributorClass="com.shashwat.rcp.message.translator.editors.MTEditorContributor"
             default="false"
             extensions="properties"
-            id="com.shashwat.rcp.message.translator.editors.MTEditor"
+            id="com.shashwat.rcp.message.translator.editors.mteditor"
             name="Message Translator">
       </editor>
    </extension>
@@ -24,5 +25,35 @@
             class="com.shashwat.rcp.message.translator.handler.TranslateMessageHandler"
             commandId="com.shashwat.rcp.message.translator.translatecommand">
       </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.jdt.ui.PackageExplorer">
+         <command
+               commandId="com.shashwat.rcp.message.translator.translatecommand"
+               label="Translate"
+               style="push">
+            <visibleWhen>
+               <with variable="activeMenuSelection">
+                  <iterate ifEmpty="false">
+                  	<adapt type="org.eclipse.core.resources.IResource">
+                  		<test property="org.eclipse.core.resources.name" value="messages.properties"/>
+                  	</adapt>
+                  </iterate>
+               </with>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.eclipse.ui.preferencePages.Workbench"
+            class="com.shashwat.rcp.message.translator.preferences.BingTranslatorPref"
+            id="com.shashwat.rcp.message.translator.preferences.bingtranslatorpref"
+            name="Translator">
+      </page>
    </extension>
 </plugin>

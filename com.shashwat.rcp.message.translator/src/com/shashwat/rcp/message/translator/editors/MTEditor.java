@@ -18,6 +18,7 @@ import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.part.MultiPageEditorPart;
 
 public class MTEditor extends MultiPageEditorPart implements IResourceChangeListener {
+	public static final String ID = "com.shashwat.rcp.message.translator.editors.mteditor";
 	private TextEditor editor;
 	private StyledText text;
 
@@ -82,6 +83,18 @@ public class MTEditor extends MultiPageEditorPart implements IResourceChangeList
 	@Override
 	public boolean isSaveAsAllowed() {
 		return true;
+	}
+	
+	@Override
+	protected void pageChange(int newPageIndex) {
+		super.pageChange(newPageIndex);
+		if (newPageIndex == 1) {
+			doTranslateWords();
+		}
+	}
+
+	private void doTranslateWords() {
+		String text = this.editor.getDocumentProvider().getDocument(this.getEditorInput()).get();
 	}
 
 	@Override
