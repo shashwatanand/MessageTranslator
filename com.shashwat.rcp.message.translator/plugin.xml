@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="com.shashwat.rcp.message.translator.editors.MTEditor"
+            default="false"
+            extensions="properties"
+            id="com.shashwat.rcp.message.translator.editors.MTEditor"
+            name="Message Translator">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="com.shashwat.rcp.message.translator.translatecommand"
+            name="Translator">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="com.shashwat.rcp.message.translator.handler.TranslateMessageHandler"
+            commandId="com.shashwat.rcp.message.translator.translatecommand">
+      </handler>
+   </extension>
+</plugin>
